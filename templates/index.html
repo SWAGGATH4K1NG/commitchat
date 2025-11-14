@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Commit PT – Live Chat</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #18181b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        /* -------- HEADER -------- */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0f0f23;
+            padding: 15px 0;
+            border-bottom: 1px solid #1ee874;
+        }
+
+        .logo-box {
+            background: #1a1a2e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #1ee874;
+            font-size: 18px;
+            color: #1ee874;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* -------- CHAT CONTAINER -------- */
+        .chat-container {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #0f0f23;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #2a2a3e;
+            height: 75vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #1ee874;
+            border-radius: 3px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: #4ea1ff;
+        }
+
+        /* -------- MESSAGES -------- */
+        .msg {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--nameColor);
+            word-wrap: break-word;
+        }
+
+        /* Username styling */
+        .username {
+            font-weight: bold;
+            color: var(--nameColor);
+            margin-right: 8px;
+        }
+
+        .content {
+            color: #e2e8f0;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <div class="logo-box">Commit PT</div>
+</header>
+
+<div class="chat-container">
+    {% for msg in mensagens %}
+        {% set name = msg.split(":")[0] %}
+        {% set text = msg.split(":", 1)[1] %}
+        {% set color = loop.index0 % 6 %}
+
+        <div class="msg" style="--nameColor:
+            {% if color == 0 %} #1ee874
+            {% elif color == 1 %} #4ea1ff
+            {% elif color == 2 %} #ff6a6a
+            {% elif color == 3 %} #ffb84d
+            {% elif color == 4 %} #c084fc
+            {% else %} #38bdf8
+            {% endif %}
+        ">
+            <span class="username">{{ name }}</span>
+            <span class="content">: {{ text }}</span>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    // Auto-scroll to bottom of chat on page load
+    function scrollToBottom() {
+        const chatContainer = document.querySelector('.chat-container');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Scroll to bottom when page loads
+    window.addEventListener('load', scrollToBottom);
+
+    // Also scroll to bottom after a short delay to ensure all content is rendered
+    setTimeout(scrollToBottom, 100);
+</script>
+
+</body>
+</html>
