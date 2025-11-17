@@ -8,6 +8,51 @@ mensagens = [
     "User1: Hello!",
     "User2: This is a test message",
     "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
+    "User1: Hello!",
+    "User2: This is a test message",
+    "User3: Works without TikTokLive!"
 ]
 
 @app.route("/")

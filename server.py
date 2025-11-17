@@ -1,24 +1,29 @@
 from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
 from TikTokLive import TikTokLiveClient
 from TikTokLive.events import CommentEvent
 import threading
 import time
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="*")
 mensagens = []
 
 client = TikTokLiveClient(unique_id="NOME_DA_CONTA")
 
 @client.on(CommentEvent)
 async def on_comment(event: CommentEvent):
-    mensagens.append(f"{event.user.nickname}: {event.comment}")
+    message = f"{event.user.nickname}: {event.comment}"
+    mensagens.append(message)
+    # Emit the new message to all connected clients
+    socketio.emit('new_message', {'message': message})
 
 @app.route("/")
 def home():
     return render_template("index.html", mensagens=mensagens[-20:])  # últimas 20 mensagens podes colocar mais , nao sei se tem limite
 
 def run_flask():
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False)
 
 if __name__ == "__main__":
     # Inicia o servidor Flask em uma thread separada

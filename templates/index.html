@@ -88,6 +88,9 @@
         }
     </style>
 
+    <!-- Socket.IO client library -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
 </head>
 <body>
 
@@ -128,6 +131,52 @@
 
     // Also scroll to bottom after a short delay to ensure all content is rendered
     setTimeout(scrollToBottom, 100);
+
+    // Socket.IO client connection
+    const socket = io();
+
+    // Listen for new messages from the server
+    socket.on('new_message', function(data) {
+        const message = data.message;
+        const chatContainer = document.querySelector('.chat-container');
+
+        // Parse the message to get username and content
+        const parts = message.split(': ');
+        const username = parts[0];
+        const content = parts.slice(1).join(': ');
+
+        // Get message count for color cycling
+        const messageCount = document.querySelectorAll('.msg').length;
+
+        // Create message element
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'msg';
+
+        // Set color based on message count
+        const colors = ['#1ee874', '#4ea1ff', '#ff6a6a', '#ffb84d', '#c084fc', '#38bdf8'];
+        const colorIndex = messageCount % 6;
+        msgDiv.style.setProperty('--nameColor', colors[colorIndex]);
+
+        // Create username span
+        const usernameSpan = document.createElement('span');
+        usernameSpan.className = 'username';
+        usernameSpan.textContent = username;
+
+        // Create content span
+        const contentSpan = document.createElement('span');
+        contentSpan.className = 'content';
+        contentSpan.textContent = ': ' + content;
+
+        // Append spans to message div
+        msgDiv.appendChild(usernameSpan);
+        msgDiv.appendChild(contentSpan);
+
+        // Append message to chat container
+        chatContainer.appendChild(msgDiv);
+
+        // Scroll to bottom for new message
+        scrollToBottom();
+    });
 </script>
 
 </body>
